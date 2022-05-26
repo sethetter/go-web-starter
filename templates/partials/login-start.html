@@ -1,0 +1,11 @@
+<form hx-post="/login/start" hx-indicator=".global-loading">
+  <input type="hidden" name="_csrf" value="{{ .csrf }}">
+  <div class="form-control">
+    <label for="email">Email Address</label>
+    {{ range .formErrors.Email }}
+      <span class="error">{{ . }}</span>
+    {{ end }}
+    <input type="email" required name="email">
+  </div>
+  <button type="submit">Login</button>
+</form>

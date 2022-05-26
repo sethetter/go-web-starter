@@ -1,0 +1,15 @@
+<p>We've sent a verification code to {{ .email }}!</p>
+<form hx-post="/login/verify" hx-indicator=".global-loading" hx-push-url="/">
+  <input type="hidden" name="_csrf" value="{{ .csrf }}" />
+  <input type="hidden" name="email" value="{{ .email }}" />
+
+  {{ range .errors }}
+    <p class="alert {{ index . 0}}">{{ index . 1 }}</p>
+  {{ end }}
+
+  <div class="form-control">
+    <label for="code">Verification Code</label>
+    <input type="text" name="code" required />
+  </div>
+  <button type="submit">Verify</button>
+</form>

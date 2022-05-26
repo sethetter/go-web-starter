@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_DATABASE: app
+      POSTGRES_PASSWORD: supsupsup
+    volumes:
+      - app-pgdata:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    env_file: .env
+    environment:
+      DATABASE_URL: "postgres://app:supsupsup@db:5432/app"
+      APP_URL: http://localhost:8333
+      APP_NAME: Cool Project
+      APP_SECRET: itsasecret
+      APP_ENV: debug
+      FROM_EMAIL: test@localhost
+    volumes:
+      - .:/app
+    ports:
+      - 8333:8080
+
+volumes:
+  app-pgdata:

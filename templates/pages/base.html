@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cool Project</title>
+    <link href="/assets/css/app.css" rel="stylesheet" />
+    <script src="/assets/js/htmx.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="nav-left">
+        <h1>
+          <a href="/">Cool Project</a>
+        </h1>
+        <a href="/about">About</a>
+      </div>
+      <div class="nav-right">
+        <a href="/login">Login</a>
+      </div>
+    </header>
+    <main>
+      <span class="global-loading htmx-indicator"></span>
+      <div>
+        {{ range .flashes.danger }}
+          <p class="alert danger">{{ . }}</p>
+        {{ end }}
+        {{ range .flashes.warning }}
+          <p class="alert warning">{{ . }}</p>
+        {{ end }}
+        {{ range .flashes.success }}
+          <p class="alert success">{{ . }}</p>
+        {{ end }}
+        {{ range .flashes.info }}
+          <p class="alert info">{{ . }}</p>
+        {{ end }}
+        {{ range .flashes.other }}
+          <p class="alert">{{ . }}</p>
+        {{ end }}
+      </div>
+      <div id="content">
+        {{ template "content" . }}
+      </div>
+    </main>
+    <footer>
+      <p>&copy; Seth Etter</p>
+    </footer>
+  </body>
+</html>
